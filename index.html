@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nosso Cantinho ♡</title>
+    <style>
+        /* RESET e FONTES */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #fff5f0;
+            font-family: 'Segoe UI', 'Helvetica Neue', cursive, sans-serif;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .container {
+            max-width: 1200px;
+            width: 100%;
+            background: rgba(255, 245, 240, 0.7);
+            backdrop-filter: blur(2px);
+            border-radius: 60px 60px 30px 30px;
+            padding: 30px 20px 50px;
+            box-shadow: 0 10px 30px rgba(200, 150, 140, 0.15);
+            position: relative;
+        }
+
+        .header {
+            text-align: center;
+            position: relative;
+            margin-bottom: 30px;
+        }
+
+        .header h1 {
+            font-size: 4rem;
+            font-weight: 300;
+            color: #b36b6b;
+            letter-spacing: 2px;
+            text-shadow: 2px 2px 0 #ffe5dd;
+            display: inline-block;
+            position: relative;
+        }
+
+        .header h1::after {
+            content: '♡';
+            font-size: 2.5rem;
+            color: #e5989b;
+            position: absolute;
+            right: -45px;
+            top: -5px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.8; }
+            50% { transform: scale(1.2); opacity: 1; }
+            100% { transform: scale(1); opacity: 0.8; }
+        }
+
+        .polaroid-principal {
+            display: flex;
+            justify-content: center;
+            margin: 25px 0 20px;
+        }
+
+        .polaroid {
+            background: #fffdfa;
+            padding: 15px 15px 40px 15px;
+            box-shadow: 0 8px 20px rgba(180, 120, 110, 0.2);
+            transform: rotate(-2deg);
+            transition: transform 0.2s ease;
+            border-radius: 4px 4px 20px 20px;
+            width: fit-content;
+        }
+
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .polaroid img {
+            width: 280px;
+            height: 280px;
+            object-fit: cover;
+            border-radius: 4px;
+            display: block;
+            background: #f0d6cb;
+        }
+
+        .polaroid-caption {
+            margin-top: 10px;
+            font-size: 1.2rem;
+            color: #b36b6b;
+            font-style: italic;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+
+        .decorations {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            font-size: 1.8rem;
+            margin: 10px 0 15px;
+            color: #dba39a;
+            opacity: 0.7;
+        }
+
+        .decorations span {
+            display: inline-block;
+            animation: float 4s ease-in-out infinite;
+        }
+
+        .decorations span:nth-child(2) { animation-delay: 0.5s; }
+        .decorations span:nth-child(3) { animation-delay: 1s; }
+        .decorations span:nth-child(4) { animation-delay: 1.5s; }
+        .decorations span:nth-child(5) { animation-delay: 2s; }
+
+        @keyframes float {
+            0% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-8px) rotate(5deg); }
+            100% { transform: translateY(0px) rotate(0deg); }
+        }
+
+        .frase-cantinho {
+            font-size: 1.2rem;
+            color: #a06969;
+            text-align: center;
+            font-style: italic;
+            margin: 10px 0 30px;
+            padding: 8px 20px;
+            background: rgba(255, 235, 225, 0.6);
+            border-radius: 40px;
+            display: inline-block;
+            backdrop-filter: blur(2px);
+        }
+
+        .albuns-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px 20px;
+            margin: 40px 0 30px;
+        }
+
+        .album-card {
+            background: #fffbf9;
+            border-radius: 30px 30px 20px 20px;
+            padding: 25px 12px 18px;
+            text-align: center;
+            box-shadow: 0 6px 18px rgba(190, 140, 130, 0.15);
+            transition: all 0.25s ease;
+            cursor: pointer;
+            border: 1px solid #fce3db;
+            position: relative;
+        }
+
+        .album-card:hover {
+            transform: scale(1.03) translateY(-5px);
+            box-shadow: 0 14px 28px rgba(180, 120, 110, 0.2);
+            border-color: #ecc6bc;
+        }
+
+        .album-card .emoji-album {
+            font-size: 2.6rem;
+            display: block;
+            margin-bottom: 6px;
+        }
+
+        .album-card h3 {
+            font-size: 1.3rem;
+            font-weight: 400;
+            color: #774e4e;
+            margin: 6px 0 4px;
+        }
+
+        .album-card .album-desc {
+            font-size: 0.8rem;
+            color: #b2897e;
+            letter-spacing: 0.3px;
+            border-top: 1px dashed #eacede;
+            padding-top: 8px;
+            margin-top: 8px;
+            opacity: 0.8;
+        }
+
+        .album-aberto {
+            display: none;
+            background: #fff8f5;
+            padding: 30px 20px;
+            border-radius: 40px 40px 25px 25px;
+            margin: 30px 0 20px;
+            box-shadow: inset 0 0 0 1px #f7dfd7, 0 10px 25px rgba(160, 100, 90, 0.1);
+            position: relative;
+        }
+
+        .album-aberto.ativo {
+            display: block;
+        }
+
+        .album-aberto .voltar {
+            display: inline-block;
+            background: #ecc6bc;
+            color: #5f3e3e;
+            padding: 5px 20px;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            cursor: pointer;
+            margin-bottom: 25px;
+            border: none;
+            transition: 0.2s;
+            font-weight: 500;
+        }
+
+        .album-aberto .voltar:hover {
+            background: #dbb2a8;
+            transform: scale(0.96);
+        }
+
+        .pagina-livro {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px 20px;
+            margin-top: 20px;
+        }
+
+        .pagina-item {
+            background: #fffcf9;
+            padding: 12px 12px 20px;
+            border-radius: 20px 20px 35px 12px;
+            box-shadow: 0 4px 10px rgba(190, 150, 140, 0.12);
+            border: 1px solid #f5ddd4;
+            position: relative;
+            transition: 0.2s;
+        }
+
+        .pagina-item:hover {
+            transform: rotate(0.5deg) scale(1.01);
+        }
+
+        .pagina-item .foto-inclinada {
+            transform: rotate(-3deg);
+            transition: transform 0.3s;
+        }
+
+        .pagina-item .foto-inclinada:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        /* NOVO: fotos quadradas com ajuste de posição */
+        .pagina-item img {
+            width: 100%;
+            aspect-ratio: 1 / 1;           /* força a foto a ficar quadrada */
+            object-fit: cover;
+            object-position: 50% 35%;       /* desce um pouco (35% do topo) para mostrar o rosto */
+            border-radius: 14px 14px 6px 6px;
+            background: #edd9d0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+        }
+
+        .pagina-item .data-legenda {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin: 10px 0 5px;
+            font-size: 0.85rem;
+            color: #825b5b;
+            border-bottom: 1px dotted #ebd3cb;
+            padding-bottom: 5px;
+        }
+
+        .pagina-item .data-legenda .data {
+            background: #f5e1da;
+            padding: 0 10px;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: #784f4f;
+        }
+
+        .pagina-item .legenda {
+            font-size: 0.95rem;
+            color: #5f4040;
+            margin: 6px 0 4px;
+            font-style: italic;
+        }
+
+        .pagina-item .adesivos {
+            font-size: 1.5rem;
+            letter-spacing: 6px;
+            margin: 8px 0 2px;
+            opacity: 0.8;
+        }
+
+        .pagina-item .washi-tape {
+            position: absolute;
+            top: -6px;
+            left: 20%;
+            width: 40px;
+            height: 18px;
+            background: repeating-linear-gradient(45deg, #f7d4c0, #f7d4c0 6px, #fce3d0 6px, #fce3d0 12px);
+            border-radius: 20px 20px 0 0;
+            opacity: 0.5;
+            transform: rotate(-6deg);
+            pointer-events: none;
+        }
+
+        .pagina-item .rabisco {
+            font-size: 1.2rem;
+            color: #c99181;
+            letter-spacing: 2px;
+            margin-top: 3px;
+        }
+
+        .pagina-item .coracoes {
+            color: #d46a6a;
+            font-size: 1rem;
+            letter-spacing: 3px;
+        }
+
+        .extras-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 18px;
+            margin: 35px 0 20px;
+        }
+
+        .extra-card {
+            background: #fffaf7;
+            padding: 12px 22px;
+            border-radius: 60px;
+            border: 1px solid #f5dad1;
+            box-shadow: 0 3px 10px rgba(170, 120, 110, 0.08);
+            font-size: 0.95rem;
+            color: #6d4949;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            transition: 0.2s;
+            cursor: pointer;
+        }
+
+        .extra-card:hover {
+            background: #faece7;
+            transform: scale(1.02);
+        }
+
+        .extra-card .icone-extra {
+            font-size: 1.6rem;
+        }
+
+        /* Modal para os extras */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.3);
+            backdrop-filter: blur(4px);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-overlay.ativo {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #fff8f5;
+            padding: 40px 35px;
+            border-radius: 40px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.2);
+            position: relative;
+            animation: modalFade 0.3s ease;
+        }
+
+        @keyframes modalFade {
+            from { transform: scale(0.9) translateY(20px); opacity: 0; }
+            to { transform: scale(1) translateY(0); opacity: 1; }
+        }
+
+        .modal-content .fechar-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 2rem;
+            cursor: pointer;
+            color: #b36b6b;
+            background: none;
+            border: none;
+            transition: 0.2s;
+        }
+
+        .modal-content .fechar-modal:hover {
+            transform: rotate(90deg);
+        }
+
+        .modal-content h2 {
+            color: #774e4e;
+            font-weight: 300;
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+        }
+
+        .modal-content p, .modal-content li {
+            color: #5f4040;
+            line-height: 1.8;
+            font-size: 1.1rem;
+        }
+
+        .modal-content ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .modal-content ul li {
+            padding: 8px 0;
+            border-bottom: 1px dashed #f5ddd4;
+        }
+
+        .modal-content .cartinha-texto {
+            background: #fcf0ea;
+            padding: 15px 20px;
+            border-radius: 20px;
+            margin: 10px 0;
+            font-style: italic;
+        }
+
+        @media (max-width: 650px) {
+            .header h1 {
+                font-size: 2.8rem;
+            }
+            .polaroid img {
+                width: 200px;
+                height: 200px;
+            }
+            .album-card h3 {
+                font-size: 1.1rem;
+            }
+            .modal-content {
+                padding: 30px 20px;
+            }
+            .pagina-livro {
+                grid-template-columns: 1fr;
+            }
+            .pagina-item img {
+                aspect-ratio: 1 / 1; /* mantém quadrado no celular também */
+                height: auto; /* sobrescreve se houver height fixo */
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+
+    <!-- PÁGINA INICIAL -->
+    <div id="pagina-inicial">
+        <div class="header">
+            <h1>Nosso cantinho</h1>
+            <div class="decorations">
+                <span>✦</span>
+                <span>♥</span>
+                <span>✿</span>
+                <span>🌸</span>
+                <span>🎀</span>
+            </div>
+        </div>
+
+        <div class="polaroid-principal">
+            <div class="polaroid">
+                <img src="/fotos/capa.jpeg" alt="Momento especial">
+                <div class="polaroid-caption">♡ colecionando momentos que merecem ficar para sempre</div>
+            </div>
+        </div>
+
+        <div style="text-align: center; margin: 5px 0 15px;">
+            <span class="frase-cantinho"> cada foto é um pedacinho de história</span>
+        </div>
+
+        <div class="albuns-grid" id="albuns-grid">
+            <div class="album-card" data-album="especiais">
+                <span class="emoji-album">🌸</span>
+                <h3>Momentos especiais</h3>
+                <div class="album-desc">os mais doces</div>
+            </div>
+            <div class="album-card" data-album="verao">
+                <span class="emoji-album">☀️</span>
+                <h3>Verão 2025 - 2026</h3>
+                <div class="album-desc">sol, mar e sorrisos</div>
+            </div>
+            <div class="album-card" data-album="aleatorias">
+                <span class="emoji-album">🧸</span>
+                <h3>Memórias aleatórias</h3>
+                <div class="album-desc">do dia a dia</div>
+            </div>
+            <div class="album-card" data-album="pessoas">
+                <span class="emoji-album">💌</span>
+                <h3>Pessoas que amo</h3>
+                <div class="album-desc">coração cheio</div>
+            </div>
+            <div class="album-card" data-album="felicidades">
+                <span class="emoji-album">✨</span>
+                <h3>Pequenas felicidades</h3>
+                <div class="album-desc">brilhos do dia</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ÁLBUM ABERTO -->
+    <div id="album-aberto" class="album-aberto">
+        <button class="voltar" id="btn-voltar">← voltar para os álbuns</button>
+        <h2 id="titulo-album" style="font-weight:300; color:#774e4e; margin-bottom: 8px;"></h2>
+        <div style="font-size:0.9rem; color:#a87a6e; margin-bottom: 16px; display: flex; gap: 16px; flex-wrap: wrap;">
+            <span>🎵 <span id="musica-associada">"Canção do verão"</span></span>
+            <span>🗓️ <span id="linha-tempo">2026 · 2025</span></span>
+            <span>⭐ <span id="favoritos-indicador">❤️  favoritas</span></span>
+        </div>
+        <div id="paginas-livro" class="pagina-livro"></div>
+        <div style="margin-top: 25px; text-align: center;">
+            <span style="background:#f7e4dc; padding:4px 18px; border-radius:60px; font-size:0.8rem; color:#6d4a4a;">📮 : "esse dia foi mágico assim como todos com você ✨"</span>
+        </div>
+    </div>
+
+    <!-- EXTRAS -->
+    <div class="extras-grid">
+        <div class="extra-card" data-extra="cartinhas">
+            <span class="icone-extra">📮</span> Cartinhas
+        </div>
+        <div class="extra-card" data-extra="musica">
+            <span class="icone-extra">🎵</span> Essa música me lembra...
+        </div>
+        <div class="extra-card" data-extra="linha-tempo">
+            <span class="icone-extra">🗓️</span> Linha do tempo
+        </div>
+        <div class="extra-card" data-extra="favoritos">
+            <span class="icone-extra">🌟</span> Favoritos
+        </div>
+    </div>
+
+</div>
+
+<!-- MODAL (para os extras) -->
+<div id="modal-extras" class="modal-overlay">
+    <div class="modal-content">
+        <button class="fechar-modal" id="fechar-modal">✕</button>
+        <h2 id="modal-titulo">Título</h2>
+        <div id="modal-corpo"></div>
+    </div>
+</div>
+
+<script>
+    (function() {
+        const dadosAlbuns = {
+            especiais: {
+                titulo: '🌸 Momentos especiais',
+                musica: ' A Droga do Amor Canção de Tiankris ',
+                linhaTempo: '2025 · 2026',
+                favoritos: '❤️  favoritas',
+                paginas: [
+                    { fotos: ['fotos/5.jpeg'], data: '12/06/2026', legenda: 'nosso dia dos namorados', adesivos: '🌸💕✨', washi: true, inclinada: true },
+                    { fotos: ['fotos/4.jpeg'], data: '21/11/2025', legenda: 'pôr do sol na praia', adesivos: '🌅🌊❤️', washi: false, inclinada: false },
+                ]
+            },
+            verao: {
+                titulo: '☀️ dia de sol 2025',
+                musica: 'Barcelona L7NNON',
+                linhaTempo: '',
+                favoritos: '❤️ 2 favoritas',
+                paginas: [
+                    { fotos: ['fotos/2.jpeg'], data: '07/09/2025', legenda: ' dia de praia', adesivos: '🏖️🩴🍉', washi: true, inclinada: true },
+                    { fotos: ['fotos/3.jpeg'], data: '16/09/2026', legenda: 'praiaaaa', adesivos: '🍹🎶', washi: false, inclinada: false },
+                ]
+            },
+            aleatorias: {
+                titulo: '🧸 Memórias aleatórias',
+                musica: 'Me Leva - Canção de Delacruz',
+                linhaTempo: '2025',
+                favoritos: '❤️ 1 favorita',
+                paginas: [
+                    { fotos: ['fotos/8.jpeg'], data: '02/09/2025', legenda: 'noite chuvosa ', adesivos: '☕🌧️📖', washi: true, inclinada: true },
+                    { fotos: ['fotos/9.jpeg'], data: '20/09/2025', legenda: 'noite na cidade', adesivos: '🌃✨', washi: false, inclinada: false },
+                ]
+            },
+            pessoas: {
+                titulo: '💌 Pessoas que amo',
+                musica: ' Planos (part. Luccas Carlos)BK',
+                linhaTempo: '2025',
+                favoritos: '❤️  favoritas',
+                paginas: [
+                    { fotos: ['fotos/suafamilia.jpeg'], data: '', legenda: 'sua familia', adesivos: '💖', washi: true, inclinada: false },
+                    { fotos: ['fotos/natal.jpeg'], data: '25/12/2025', legenda: 'primeiro natal juntos', adesivos: '🎄🎁', washi: false, inclinada: true },
+                ]
+            },
+            felicidades: {
+                titulo: '✨ Pequenas felicidades',
+                musica: 'Happy - Pharrell Williams',
+                linhaTempo: '2026',
+                favoritos: '❤️  favoritas',
+                paginas: [
+                    { fotos: ['fotos/6.jpeg'], data: '04/08/2026', legenda: 'treino juntos', adesivos: '🌷🌸', washi: true, inclinada: true },
+                    { fotos: ['fotos/7.jpeg'], data: '10/05/2026', legenda: 'primeiro bolinho', adesivos: '📚☕', washi: false, inclinada: false },
+                ]
+            }
+        };
+
+        const albumAbertoDiv = document.getElementById('album-aberto');
+        const paginasLivro = document.getElementById('paginas-livro');
+        const tituloAlbum = document.getElementById('titulo-album');
+        const musicaAssociada = document.getElementById('musica-associada');
+        const linhaTempo = document.getElementById('linha-tempo');
+        const favoritosIndicador = document.getElementById('favoritos-indicador');
+        const btnVoltar = document.getElementById('btn-voltar');
+        const modalOverlay = document.getElementById('modal-extras');
+        const modalTitulo = document.getElementById('modal-titulo');
+        const modalCorpo = document.getElementById('modal-corpo');
+        const fecharModal = document.getElementById('fechar-modal');
+
+        function abrirAlbum(albumId) {
+            const dados = dadosAlbuns[albumId];
+            if (!dados) return;
+
+            document.getElementById('pagina-inicial').style.display = 'none';
+            albumAbertoDiv.classList.add('ativo');
+
+            tituloAlbum.textContent = dados.titulo;
+            musicaAssociada.textContent = `"${dados.musica}"`;
+            linhaTempo.textContent = dados.linhaTempo;
+            favoritosIndicador.textContent = dados.favoritos;
+
+            paginasLivro.innerHTML = '';
+            dados.paginas.forEach((pag, index) => {
+                const item = document.createElement('div');
+                item.className = 'pagina-item';
+
+                if (pag.inclinada) {
+                    item.style.transform = 'rotate(-1.5deg)';
+                }
+
+                const imgSrc = pag.fotos[0] || 'https://source.unsplash.com/featured/?memory';
+                const img = document.createElement('img');
+                img.src = imgSrc;
+                img.alt = 'foto do momento';
+                if (pag.inclinada) {
+                    img.className = 'foto-inclinada';
+                }
+
+                const dataLegenda = document.createElement('div');
+                dataLegenda.className = 'data-legenda';
+                dataLegenda.innerHTML = `<span class="data">${pag.data}</span><span>${pag.legenda}</span>`;
+
+                const adesivos = document.createElement('div');
+                adesivos.className = 'adesivos';
+                adesivos.textContent = pag.adesivos || '💕✨';
+
+                const rabisco = document.createElement('div');
+                rabisco.className = 'rabisco';
+                rabisco.textContent = '✧  ✧  ✧';
+
+                const coracoes = document.createElement('div');
+                coracoes.className = 'coracoes';
+                coracoes.textContent = '♥ ♥ ♥';
+
+                if (pag.washi) {
+                    const washi = document.createElement('div');
+                    washi.className = 'washi-tape';
+                    item.appendChild(washi);
+                }
+
+                item.appendChild(img);
+                item.appendChild(dataLegenda);
+                item.appendChild(adesivos);
+                item.appendChild(rabisco);
+                item.appendChild(coracoes);
+                paginasLivro.appendChild(item);
+            });
+        }
+
+        function fecharAlbum() {
+            albumAbertoDiv.classList.remove('ativo');
+            document.getElementById('pagina-inicial').style.display = 'block';
+        }
+
+        document.querySelectorAll('.album-card').forEach(card => {
+            card.addEventListener('click', function(e) {
+                const album = this.dataset.album;
+                if (album) abrirAlbum(album);
+            });
+        });
+
+        btnVoltar.addEventListener('click', fecharAlbum);
+
+        // EXTRAS - Modal interativo
+        function abrirModal(titulo, conteudo) {
+            modalTitulo.textContent = titulo;
+            modalCorpo.innerHTML = conteudo;
+            modalOverlay.classList.add('ativo');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function fecharModalFunc() {
+            modalOverlay.classList.remove('ativo');
+            document.body.style.overflow = 'auto';
+        }
+
+        fecharModal.addEventListener('click', fecharModalFunc);
+        modalOverlay.addEventListener('click', function(e) {
+            if (e.target === this) fecharModalFunc();
+        });
+
+        // Conteúdos dos extras
+        const extrasConteudo = {
+            cartinhas: {
+                titulo: '📮 Cartinhas',
+                html: `
+                    <div class="cartinha-texto">💌 "Você iluminou meu dia com seu sorriso. Cada momento ao seu lado é um presente."</div>
+                    <div class="cartinha-texto">💕 "Lembro do nosso primeiro encontro como se fosse ontem. Obrigado por fazer parte da minha história."</div>
+                    <div class="cartinha-texto">✨ "Algumas pessoas entram em nossas vidas e deixam marcas para sempre. Você é uma delas."</div>
+                    <div style="margin-top:15px; text-align:right; color:#b36b6b; font-style:italic;">— com carinho, da sua princesinha ♡</div>
+                `
+            },
+            musica: {
+                titulo: '🎵 Essa música me lembra nois dois...',
+                html: `
+                    <p><strong>🎶O Sol - Canção de Vitor Kley</strong><br>
+                    <span style="color:#825b5b;">"Você é meu sol de cada dia"</span></p>
+                    <p><strong>🎶 Partilhar - Rubel </strong><br>
+                    <span style="color:#825b5b;">"quero partilhar minha vida com você"</span></p>
+                    <p><strong>🎶 Quando Bate Aquela Saudade - Rubel</strong><br>
+                    <span style="color:#825b5b;">"simplismente..."</span></p>
+                    <p style="margin-top:15px; font-style:italic; color:#a06969;">🎵 Cada música tem uma história especial guardada</p>
+                `
+            },
+            'linha-tempo': {
+                titulo: '🗓️ Linha do tempo',
+                html: `
+                    <ul>
+                        <li>📅 <strong>17 de agosto</strong> — Nosso primeiro encontro</li>
+                        <li>📅 <strong>22 de agosto</strong> — conhecendo os pais</li>
+                        <li>📅 <strong>18 de outubro</strong> — pedido de namoro</li>
+                        <li>📅 <strong>17 de dezembro</strong> — seu aniversario</li>
+                        <li>📅 <strong>31 de dezembro</strong> — primeiro ano novo juntos</li>
+                        <li>📅 <strong>12 de junho</strong> — dia dos namorados</li>
+                    </ul>
+                    <p style="margin-top:15px; color:#a06969;">✨ Cada data é um marco inesquecível</p>
+                `
+            },
+            favoritos: {
+                titulo: '🌟 Favoritos',
+                html: `
+                    <ul>
+                        <li>⭐ <strong>Pôr do sol na praia</strong>  </li>
+                        <li>⭐ <strong>ir tomar sorvete</strong>  </li>
+                        <li>⭐ <strong>os dias que passamos juntos</strong>  </li>
+                        <li>⭐ <strong>nossas tardes de filminho</strong> </li>
+                        <li>⭐ <strong>voltinha de moto</strong> </li>
+                    </ul>
+                    <p style="margin-top:15px; color:#a06969;">❤️ Esses momentos são eternos</p>
+                `
+            }
+        };
+
+        document.querySelectorAll('.extra-card').forEach(card => {
+            card.addEventListener('click', function() {
+                const extra = this.dataset.extra;
+                if (extra && extrasConteudo[extra]) {
+                    const conteudo = extrasConteudo[extra];
+                    abrirModal(conteudo.titulo, conteudo.html);
+                }
+            });
+        });
+
+        // Fechar modal com ESC
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') fecharModalFunc();
+        });
+    })();
+</script>
+</body>
+</html>
